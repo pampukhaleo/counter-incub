@@ -1,0 +1,51 @@
+.counter-container {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    border: 5px solid #a7c0ff;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.start-end-container {
+    display: flex;
+    margin-bottom: 15px;
+    gap: 10px;
+
+}
+
+.start-end-container input {
+    width: 50%;
+    border-radius: 10px;
+    height: 25px;
+}
+
+.value-container {
+    width: 100%;
+    background-color: #a7c0ff;
+    border-radius: 15px;
+    flex-grow: 1;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.value {
+    font-size: 7em;
+    line-height: 2;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+.red {
+    color: red;
+}
+
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border: 5px solid #a7c0ff;
+    border-radius: 15px;
+    padding: 15px;
+}
+

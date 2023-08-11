@@ -1,0 +1,13 @@
+.button {
+    height: 50px;
+    padding: 15px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 2.5em;
+    line-height: 10px;
+    background-color: #a7c0ff;
+}
+
+.button:disabled {
+    background-color: #4d5778;
+}
