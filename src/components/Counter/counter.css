@@ -12,10 +12,12 @@
     gap: 10px;
 }
 
-.start-end-container input {
-    width: 50%;
+.start-end-container > input {
+    background-color: #a7c0ff;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 800;
     border-radius: 10px;
-    height: 25px;
 }
 
 .value-container {
@@ -38,10 +40,16 @@
     color: red;
 }
 
+.start-end-container .red-input {
+    background-color: red;
+    border: 1px solid #350606;
+    color: white;
+}
+
 .button-container {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     border: 5px solid #a7c0ff;
     border-radius: 15px;
     padding: 15px;

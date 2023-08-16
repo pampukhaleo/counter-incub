@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { Counter } from './components/Counter/Counter';
 
 function App() {
+  const [error, setError] = useState<string>('');
+
+  console.log(error)
   return (
     <div className="App">
-      <Counter />
+      {
+        <h1 className={ `${error ? 'error' : 'hide'}` }>{ error }</h1>
+      }
+      <Counter setError={ setError } error={ error }/>
     </div>
   );
 }
