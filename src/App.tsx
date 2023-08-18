@@ -5,7 +5,6 @@ import { Counter } from './components/Counter/Counter';
 function App() {
   const [error, setError] = useState<string>('');
 
-  console.log(error)
   return (
     <div className="App">
       {

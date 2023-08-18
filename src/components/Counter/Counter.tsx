@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ChangeEventHandler, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 
 import './counter.css'
 import { Button } from '../Button/Button';
@@ -14,42 +14,54 @@ export const Counter = ({ setError, error }: PropsType) => {
   const [disabled, setDisabled] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(false);
 
+  useEffect(() => {
+    const getCounterValue = localStorage.getItem('counterValue')
+    if (getCounterValue) {
+      const stringValue = JSON.parse(getCounterValue)
+      setCounterValue(stringValue)
+    }
+    const getStartValue = localStorage.getItem('startValue')
+    if (getStartValue) {
+      const stringValue = JSON.parse(getStartValue)
+      setStartValue(stringValue)
+    }
+    const getMaxValue = localStorage.getItem('maxValue')
+    if (getMaxValue) {
+      const stringValue = JSON.parse(getMaxValue)
+      setMaxValue(stringValue)
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('counterValue', JSON.stringify(counterValue))
+    localStorage.setItem('startValue', JSON.stringify(startValue))
+    localStorage.setItem('maxValue', JSON.stringify(maxValue))
+  }, [counterValue, startValue, maxValue]);
+
   const incrementValue = () => {
     //increment value
     setCounterValue(counterValue + 1)
-    //if value = maxValue - we can increment no more
+    //if value >= maxValue - we can increment no more
     setDisabled(counterValue >= (maxValue - 1))
   }
 
   const resetValue = () => {
     //we go back to saved start value
     setCounterValue(startValue)
-    //setting disabled value to initial - false. (if not we have a bug where increment button stays disabled)
+    //setting disabled value to initial - false. (if not we have a bug where increment button stays disabled if value reached maxValue)
     setDisabled(false)
   }
 
   const changeStartValue = (e: ChangeEvent<HTMLInputElement>) => {
     setStartValue(+e.currentTarget.value)
-    if (+e.currentTarget.value < 0 || +e.currentTarget.value >= maxValue) {
-      setError('Incorrect values. Please change input numbers')
-      return
-    }
-    if (+e.currentTarget.value >= 0 || +e.currentTarget.value <= maxValue) {
-      setError('')
-      return
-    }
+    //validation
+    setError(+e.currentTarget.value < 0 || +e.currentTarget.value >= maxValue ? 'Incorrect values. Please change input numbers' : '')
   }
 
   const changeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
     setMaxValue(+e.currentTarget.value)
-    if (+e.currentTarget.value < 0 || +e.currentTarget.value <= startValue || startValue < 0) {
-      setError('Incorrect values. Please change input numbers')
-      return
-    }
-    if (+e.currentTarget.value >= 0 || +e.currentTarget.value <= startValue) {
-      setError('')
-      return
-    }
+    //validation
+    setError(+e.currentTarget.value < 0 || +e.currentTarget.value <= startValue || startValue < 0 ? 'Incorrect values. Please change input numbers' : '')
   }
 
   const showInputs = () => {
@@ -78,7 +90,6 @@ export const Counter = ({ setError, error }: PropsType) => {
           : <div className="value-container">
             <span className={ `value ${ disabled && 'red' }` }>{ counterValue }</span>
           </div>
-
       }
       <div className="button-container">
         {
@@ -95,8 +106,6 @@ export const Counter = ({ setError, error }: PropsType) => {
             ? <Button name="save values" disabled={ error !== '' } callBack={ saveValues }/>
             : <Button name="set" callBack={ showInputs }/>
         }
-
-
       </div>
     </div>
   )
