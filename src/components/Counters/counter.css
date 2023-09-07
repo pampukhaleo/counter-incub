@@ -1,6 +1,4 @@
 .counter-container {
-    display: flex;
-    flex-direction: column;
     border: 5px solid #a7c0ff;
     border-radius: 15px;
     padding: 15px;
@@ -8,6 +6,7 @@
 
 .start-end-container {
     display: flex;
+    justify-content: space-between;
     margin-bottom: 15px;
     gap: 10px;
 }
@@ -56,3 +55,16 @@
     gap: 15px;
 }
 
+.second-container {
+    display: flex;
+    align-items: center;
+    margin-top: 125px;
+    gap: 50px;
+}
+
+.set-container {
+    height: 55%;
+    border: 5px solid #a7c0ff;
+    border-radius: 15px;
+    padding: 15px;
+}

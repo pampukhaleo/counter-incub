@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-import { Counter } from './components/Counter/Counter';
+import { FirstCounterContainer } from './components/Counters/FirstCounter/FirstCounterContainer';
+import { SecondCounterContainer } from './components/Counters/SecondCounter/SecondCounterContainer';
 
 function App() {
-  const [error, setError] = useState<string>('');
 
   return (
     <div className="App">
-      {
-        <h1 className={ `${error ? 'error' : 'hide'}` }>{ error }</h1>
-      }
-      <Counter setError={ setError } error={ error }/>
+      <FirstCounterContainer />
+      <SecondCounterContainer />
     </div>
   );
 }

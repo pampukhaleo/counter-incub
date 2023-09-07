@@ -1,13 +1,13 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 
-import './counter.css'
-import { Button } from '../Button/Button';
+import '../counter.css'
+import { Button } from '../../Button/Button';
 
 type PropsType = {
   setError: (text: string) => void
   error: string
 }
-export const Counter = ({ setError, error }: PropsType) => {
+export const FirstCounter = ({ setError, error }: PropsType) => {
   const [counterValue, setCounterValue] = useState<number>(0);
   const [startValue, setStartValue] = useState<number>(0);
   const [maxValue, setMaxValue] = useState<number>(1);
@@ -16,19 +16,22 @@ export const Counter = ({ setError, error }: PropsType) => {
 
   useEffect(() => {
     const getCounterValue = localStorage.getItem('counterValue')
-    if (getCounterValue) {
-      const stringValue = JSON.parse(getCounterValue)
-      setCounterValue(stringValue)
-    }
     const getStartValue = localStorage.getItem('startValue')
-    if (getStartValue) {
-      const stringValue = JSON.parse(getStartValue)
-      setStartValue(stringValue)
-    }
     const getMaxValue = localStorage.getItem('maxValue')
-    if (getMaxValue) {
-      const stringValue = JSON.parse(getMaxValue)
-      setMaxValue(stringValue)
+
+    if (getCounterValue && getStartValue && getMaxValue) {
+      const stringCounterValue = JSON.parse(getCounterValue)
+      setCounterValue(stringCounterValue)
+
+      const stringStartValue = JSON.parse(getStartValue)
+      setStartValue(stringStartValue)
+
+      const stringMaxValue = JSON.parse(getMaxValue)
+      setMaxValue(stringMaxValue)
+      //if after restart value >= maxValue - we can increment no more
+      if (stringCounterValue === stringMaxValue) {
+        setDisabled(true)
+      }
     }
   }, []);
 
